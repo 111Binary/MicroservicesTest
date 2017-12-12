@@ -1,0 +1,17 @@
+﻿[
+  {
+    'Id': 'e43c5a9e-6bd9-4d89-bf1a-014e09868210',
+    'Name': 'Kalles Grustransporter AB',
+    'Address': 'Cementvägen 8, 111 11 Södertälje'
+  },
+  {
+    'Id': 'd6e2e016-9f07-4e08-b018-7d8d21fe73d1',
+    'Name': 'Johans Bulk AB',
+    'Address': 'Balkvägen 12, 222 22 Stockholm'
+  },
+  {
+    'Id': 'fd267078-3516-4332-a0ec-69c12ce862aa',
+    'Name': 'Haralds Värdetransporter AB',
+    'Address': 'Budgetvägen 1, 333 33 Uppsala '
+  }
+]

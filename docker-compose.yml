@@ -1,0 +1,82 @@
+version: '3'
+
+services:
+  start_dependencies:
+    image: dadarek/wait-for-dependencies
+    environment:
+      - SLEEP_LENGTH=1
+    depends_on:
+      - rabbitmq
+      - mongo
+    command: rabbitmq:5672
+
+  microservicestest.apigateway:
+    image: microservicestest.apigateway
+    build:
+      context: .
+      dockerfile: MicroservicesTest.ApiGateway/Dockerfile
+    depends_on:
+      - start_dependencies 
+    links:
+      - rabbitmq
+      - mongo
+    environment:
+      - ASPNETCORE_ENVIRONMENT=docker
+      - ASPNETCORE_URLS=http://*:8091
+    ports:
+      - '8091:8091'
+
+  microservicestest.ping:
+    image: microservicestest.ping
+    build:
+      context: .
+      dockerfile: MicroservicesTest.Ping/Dockerfile
+    depends_on:
+      - start_dependencies 
+    links:
+      - rabbitmq
+      - mongo
+    environment:
+      - ASPNETCORE_ENVIRONMENT=docker
+      - ASPNETCORE_URLS=http://*:8095
+    ports:
+      - '8095:8095'
+
+  microservicestest.ui:
+    image: microservicestest.ui
+    build:
+      context: .
+      dockerfile: MicroservicesTest.UI/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=docker
+      - ASPNETCORE_URLS=http://*:8080
+    ports:
+      - '8080:8080'
+
+  microservicestest.apigateway.command:
+    image: microservicestest.apigateway.command
+    build:
+      context: .
+      dockerfile: MicroservicesTest.ApiGateway.Command/Dockerfile
+    depends_on:
+      - start_dependencies 
+    links:
+      - rabbitmq
+    environment:
+      - ASPNETCORE_ENVIRONMENT=docker
+      - ASPNETCORE_URLS=http://*:8090
+    ports:
+      - '8090:8090'
+
+      
+  mongo:
+    image: mongo
+    ports:
+      - '27017:27017'
+
+  rabbitmq:
+    image: rabbitmq:3.6.5-management
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+
