@@ -28,12 +28,10 @@ namespace MicroservicesTest.ApiGateway
                                                                      .AllowAnyHeader()));
             services.AddMvc();
             services.AddMongoDB(Configuration);
-            services.AddScoped<IActivityRepository, ActivityRepository>();
             services.AddScoped<IVehicleRepository, VehicleRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IDatabaseSeeder, CustomMongoSeeder>();
             services.AddRabbitMq(Configuration);
-            services.AddScoped<IEventHandler<ActivityCreated>, ActivityCreatedHandler>();
             services.AddScoped<IEventHandler<PingReceived>, PingReceivedHandler>();
 
         }
@@ -49,16 +47,6 @@ namespace MicroservicesTest.ApiGateway
 
             app.ApplicationServices.GetService<IDatabaseInitializer>().InitializeAsync();
 
-            //app.Use(async (context, next) =>
-            //{
-            //    context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
-            //    context.Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, PUT,OPTIONS");
-            //    context.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type");
-
-            //    await next();
-            //});
-            //ToDo: check that
-            //app.UseAuthentication();
             app.UseMvc();
         }
     }

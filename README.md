@@ -10,9 +10,7 @@ the solution used the following tools
  - Docker
 
 
-
- ![alt text](https://raw.githubusercontent.com/abdelgawad/MicroservicesTest/MicroservicesArchitecture.png)
-
+ ![Alt text](MicroservicesArchitecture.png?raw=true "Dockerized microservices architecture")
 
  ### Table of contents
 

@@ -27,14 +27,9 @@ namespace MicroservicesTest
             services.AddMvc();
             services.AddLogging();
             services.AddMongoDB(Configuration);
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<IActivityRepository, ActivityRepository>();
             services.AddScoped<IPingRepository, PingRepository>();
-            services.AddScoped<IDatabaseSeeder, CustomMongoSeeder>();
             services.AddRabbitMq(Configuration);
-            services.AddScoped<IActivityService, ActivityService>();
             services.AddScoped<IPingBusinessService, PingBusinessService>();
-            services.AddScoped<ICommandHandler<CreateActivity>, CreateActivityHandler>();
             services.AddScoped<ICommandHandler<PingCommand>, PingCommandHandler>();
             
         }

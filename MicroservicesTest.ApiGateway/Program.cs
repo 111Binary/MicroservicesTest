@@ -9,7 +9,6 @@ namespace MicroservicesTest.ApiGateway
         {
             ServiceHost.Create<Startup>(args)
                 .UseRabbitMq()
-                .SubscribeToEvent<ActivityCreated>()
                 .SubscribeToEvent<PingReceived>()
                 .Build()
                 .Run();
