@@ -1,10 +1,12 @@
-﻿[
+[
   {
     "outputFile": "wwwroot/js/stylesheets/_custom.css",
-    "inputFile": "wwwroot/js/stylesheets/_custom.scss"
+    "inputFile": "wwwroot/js/stylesheets/_custom.scss",
+    "sourceMap": false
   },
   {
     "outputFile": "wwwroot/js/stylesheets/_table.css",
-    "inputFile": "wwwroot/js/stylesheets/_table.scss"
+    "inputFile": "wwwroot/js/stylesheets/_table.scss",
+    "sourceMap": false
   }
 ]

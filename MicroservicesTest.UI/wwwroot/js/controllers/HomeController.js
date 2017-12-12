@@ -4,29 +4,36 @@
         .module('app')
         .controller('HomeController', ['$scope', '$http', '$timeout', function ($scope, $http, $timeout) {
             var vm = this;
+            vm.CommandBaseURL = '';
+            vm.QueryBaseURL = '';
 
-            $http.get("http://localhost:8091/customers/")
+            $http.get("/Home/Settings")
                 .then(function (response) {
-                    console.log('customers');
-                    console.log(response);
-                    vm.customers = response.data;
+                    vm.CommandBaseURL = response.data.commandBaseURL;
+                    vm.QueryBaseURL = response.data.queryBaseURL;
+
+                    vm.getCustomers();
+                    vm.getVehiclesData();
                 });
 
-            
-
-            vm.getVehiclesData = function () {
-                console.log('getVehiclesData');
-                $http.get("http://localhost:8091/vehicles/")
+            vm.getCustomers = function () {
+                $http.get(vm.QueryBaseURL+"/customers/")
                     .then(function (response) {
-                        console.log('vehicles');
-                        console.log(response);
+                        vm.customers = response.data;
+                    });
+            }
+            
+            vm.getVehiclesData = function () {
+                $http.get(vm.QueryBaseURL +"/vehicles/")
+                    .then(function (response) {
+
                         vm.vehicles = response.data;
                         $timeout(function () { vm.getVehiclesData(); }, 10000);
                     });
                 
             }
             vm.simulatePing = function (vehicle) {
-                console.log(vehicle);
+
                 var data = {
                     'VehicleId': vehicle.vehicleId
                 };
@@ -36,19 +43,7 @@
                         'Access-Control-Allow-Origin':'*'
                     }
                 };
-                $http.post('http://localhost:8090/Ping/', data, { headers: { 'Content-Type': 'application/json' } }).success(function (data, status) { });
-                //$http({
-                //    method: 'POST',
-                //    url: 'http://localhost:8090/Ping/',
-                //    data: "VehicleId=" + vehicle.vehicleId,
-                //    headers: {
-                //        'Content-Type':'application/json'
-                //    }
-                //}).then(function (success) {
-                //    console.log('ping success');
-                //}, function (error) {
-                //    console.log('ping error');
-                //});
+                $http.post(vm.CommandBaseURL + '/Ping/', data, { headers: { 'Content-Type': 'application/json' } }).success(function (data, status) { });
             }
 
             vm.showDate = function (date) {
@@ -72,8 +67,6 @@
                 return false;
 
             };
-            
-            vm.getVehiclesData();
             
         }
         ]);

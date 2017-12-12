@@ -12,11 +12,6 @@ the solution used the following tools
 
  ![Alt text](MicroservicesArchitecture.png?raw=true "Dockerized microservices architecture")
 
- ### Table of contents
-
-You can insert a table of contents using the marker `[TOC]`:
-
-[TOC]
 
  ## Getting Started
  below is the problem and proposed solution
@@ -50,16 +45,7 @@ Ping has its own isolated database to keep its business data
 -------------
  below is sequence digram and life cycle of Ping Command that will be issues from Vehicles:
 
-```sequence
-Vehicle->Command: hey, I am connected
-Command->Queue: Ping Command
-Command-->Vehicle: Accepted
-Queue-->Ping Microservice:Ping Command
-Note right of Ping Microservice: Process/Save
-Ping Microservice->Queue:Ping received event
-Queue-->Query:Ping received event
-Note right of Query:Save Data
-```
+![Alt text](SequenceDiagram.png?raw=true "Sequence Diagram")
 
 
 ### Prerequisites
@@ -70,17 +56,6 @@ to run and build this solution you will need the following software installed an
 * [Visual Studio Community 2017](https://www.visualstudio.com/downloads/) - to run and build the solution
 * [Docker](https://www.docker.com/) - to dockerize the solution	
 * [Docker toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/) - to make deployment easy ;)
-```
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-### Prerequisites
-
-What things you need to install the software and how to install them
-
-```
-Give examples
 ```
 
 ### Installing
@@ -127,8 +102,6 @@ UI                           | 8080     | system UI that used queries and comman
 ## Authors
 
 * **Mohamed Abduljawad** - *Initial work*
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
